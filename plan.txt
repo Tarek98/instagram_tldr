@@ -14,7 +14,7 @@ CLI Flow
     
     - Pick a topic for TLDR summary
 
-      - 🌟✅❌ Make repo out of current folder.
+      - ✅ Make repo out of current folder.
 
       - ❌ C̶o̶n̶v̶e̶r̶t̶i̶n̶g̶ u̶s̶e̶r̶ p̶r̶o̶m̶p̶t̶ i̶n̶t̶o̶ d̶a̶t̶a̶ r̶e̶l̶a̶t̶e̶d̶ q̶u̶e̶r̶i̶e̶s̶.̶
 
