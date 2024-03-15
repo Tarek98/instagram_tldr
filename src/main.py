@@ -43,8 +43,6 @@ text in posts, and the Instagrapi library to fetch posts, comments, and other us
             if command == "0":
                 self.help()
             elif command == "1":
-                user_id = self.ig.user_id_from_username("microsoftteams")
-                medias = cl.user_medias(user_id, 20)
                 self.teams()
             
             elif command == "2":
@@ -60,24 +58,18 @@ text in posts, and the Instagrapi library to fetch posts, comments, and other us
 
     def teams(self):
         ig = self.ig
-        user_id = ig.user_id_from_username("microsoftteams")
+        uid = ig.user_id_from_username("microsoftteams")
 
-        # 1. Get Latest Post from MS Teams official account
-        print("Here is the latest post from Microsoft Teams official account: \n")
-        post = ig.user_medias(user_id, 1)[0]
+        print("TLDR - latest post from MS Teams account: \n")
+        post = ig.user_medias(uid, 1)[0]
+        print("\t{\n\t\tPhoto URL: '"+str(post.resources[0].thumbnail_url)+
+              "',\n\t\tCaption: '"+post.caption_text+
+              "',\n\t\tLikes: '"+str(post.like_count)+"'\n\t}\n")
+        
+        print("Summary of what the post's photo shows: \n")
+        self._openai_summarize_image(str(post.resources[0].thumbnail_url))
 
-        print(f'''
-    "URL": {post.resources[0].thumbnail_url},
-    "Caption": {post.caption_text},
-    "Likes": {post.like_count}
-              ''')
-
-        print("{\nURL: "+str(post.resources[0].thumbnail_url)+
-              "\n\tCaption: "+post.caption_text+
-              "\n\tLikes: "+str(post.like_count)+"\n}\n")
-
-        # 2. 
-
+        
 
         pass
 
@@ -87,7 +79,58 @@ text in posts, and the Instagrapi library to fetch posts, comments, and other us
     def techcrunch(self):
         pass
 
-    def _create
+    def _openai_summarize_image(self, image_url):
+        image_content = requests.get(image_url).content
+        encoded_image = base64.b64encode(image_content).decode('ascii')
+        payload_messages = [
+            {
+                "type": "image_url",
+                "image_url": {
+                    "url": f"data:image/jpeg;base64,{encoded_image}"
+                }
+            },
+            {
+                "type": "text",
+                "text": "What does this image show?"
+            }
+        ]
+        result = self._openai_post_request(payload_messages)
+
+        print(result)
+
+    def _openai_post_request(self, payload_messages):
+        headers = {
+            "Content-Type": "application/json",
+            "api-key": GPT4V_KEY,
+        }
+
+        payload = {
+            "enhancements": {
+                "ocr": {
+                    "enabled": True
+                },
+                "grounding": {
+                    "enabled": True
+                }
+            },
+            "messages": [
+                {
+                    "role": "user",
+                    "content": payload_messages
+                }
+            ],
+            "temperature": 0.7,
+            "top_p": 0.95,
+            "max_tokens": 800
+        }
+
+        try:
+            response = requests.post(GPT4V_ENDPOINT, headers=headers, json=payload)
+            response.raise_for_status()  
+        except requests.RequestException as e:
+            raise SystemExit(f"Failed to make the request. Error: {e}")
+        
+        return response.json()
 
     def debug(self):
         # TODO: cont

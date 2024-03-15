@@ -23,10 +23,10 @@ CLI Flow
       - MSTeams User Experience
         - ✅ Latest post from MS Teams official page
           - ✅ main theme (text & image), comment negative vs positive sentiment %, top 3 negative comments,top 3 positive comments.
-        - 🌟 Hashtags - having hashtag in the post text 
-          * hashtag_medias_top & hashtag_medias_recent
-          - ✅ top 5 sorted from most to least likes 
-          - 1 line summary of post text & sentiment percentage for each post.
+        -̶ �̶�̶ H̶a̶s̶h̶t̶a̶g̶s̶ -̶ h̶a̶v̶i̶n̶g̶ h̶a̶s̶h̶t̶a̶g̶ i̶n̶ t̶h̶e̶ p̶o̶s̶t̶ t̶e̶x̶t̶ 
+          *̶ h̶a̶s̶h̶t̶a̶g̶_̶m̶e̶d̶i̶a̶s̶_̶t̶o̶p̶ &̶ h̶a̶s̶h̶t̶a̶g̶_̶m̶e̶d̶i̶a̶s̶_̶r̶e̶c̶e̶n̶t̶
+          -̶ ✅̶ t̶o̶p̶ 5̶ s̶o̶r̶t̶e̶d̶ f̶r̶o̶m̶ m̶o̶s̶t̶ t̶o̶ l̶e̶a̶s̶t̶ l̶i̶k̶e̶s̶ 
+          -̶ 1̶ l̶i̶n̶e̶ s̶u̶m̶m̶a̶r̶y̶ o̶f̶ p̶o̶s̶t̶ t̶e̶x̶t̶ &̶ s̶e̶n̶t̶i̶m̶e̶n̶t̶ p̶e̶r̶c̶e̶n̶t̶a̶g̶e̶ f̶o̶r̶ e̶a̶c̶h̶ p̶o̶s̶t̶.̶
         
       - Slack User Experience - Compared to MS Teams
         - 🌟 Similarities vs Difference - Content & Like Count & Comment Semantics - Most commented on post & most liked post for each product.

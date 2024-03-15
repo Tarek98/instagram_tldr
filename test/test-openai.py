@@ -14,78 +14,78 @@ headers = {
     "api-key": GPT4V_KEY,
 }
 
-IMAGE_PATH = "/Users/tarek.a/code/FHL_Instagram_TLDR/openai_test/copilot_teams_post.png"
-encoded_image = base64.b64encode(open(IMAGE_PATH, 'rb').read()).decode('ascii')
-# Payload for the request
-payload_one = {
-  "enhancements": {
-    "ocr": {
-      "enabled": True
-    },
-    "grounding": {
-      "enabled": True
-    }
-  },
-  "messages": [
-    {
-      "role": "user",
-      "content": [
-        {
-          "type": "image_url",
-          "image_url": {
-            "url": f"data:image/jpeg;base64,{encoded_image}"
-          }
-        },
-        {
-          "type": "text",
-          "text": "What does this image show?"
-        }
-      ]
-    }
-  ],
-  "temperature": 0.7,
-  "top_p": 0.95,
-  "max_tokens": 800
-}
+# IMAGE_PATH = "/Users/tarek.a/code/FHL_Instagram_TLDR/openai_test/copilot_teams_post.png"
+# encoded_image = base64.b64encode(open(IMAGE_PATH, 'rb').read()).decode('ascii')
+# # Payload for the request
+# payload_one = {
+#   "enhancements": {
+#     "ocr": {
+#       "enabled": True
+#     },
+#     "grounding": {
+#       "enabled": True
+#     }
+#   },
+#   "messages": [
+#     {
+#       "role": "user",
+#       "content": [
+#         {
+#           "type": "image_url",
+#           "image_url": {
+#             "url": f"data:image/jpeg;base64,{encoded_image}"
+#           }
+#         },
+#         {
+#           "type": "text",
+#           "text": "What does this image show?"
+#         }
+#       ]
+#     }
+#   ],
+#   "temperature": 0.7,
+#   "top_p": 0.95,
+#   "max_tokens": 800
+# }
 
-comments_like_count_list = '''[('@robertkmackey1987 😄❤️', 3), ('❤🔥❤', 3), ("@0_dd_dd_0 We're really excited about this! 😊", 1), ("Yes, I'm keeping my emails: nightdwellers@hotmail.com ecanus_movie_studio@hotmail.com douglassgibran@hotmail.com", 1), ('Mannnn... You have sooo many bugs in your product. How is your company even leading IT industry!', 0), ("I don't like teams. Seriously I hate it.", 0), ('@tstubs Hi there, Copilot for Teams is not currently available on the Apple Watch.', 0), ('App for Apple Watch???', 0), ("@natattacknelson Hi Nat, thank you for reaching out. Please send us a private message and confirm for us which version of Teams you're using (Business, Education, or Personal)", 0), ('Teams has been a constant letdown over the past couple of weeks. I log on and then 45 minutes later there is a flood of messages I have missed. What is going on?', 0), ('@2amtech Hi there, thanks for reaching out. Yes, Copilot is available on Teams', 0), ('is this already available?', 0), ('Amazing❤️\u200d🔥👏', 0), ('@douglass_gibran_enterprise', 0), ('@clinkitsolutions 💜', 0), ('Nice', 0)]'''
-# Payload for the request
-payload_comments = {
-  "enhancements": {
-    "ocr": {
-      "enabled": True
-    },
-    "grounding": {
-      "enabled": True
-    }
-  },
-  "messages": [
-    {
-      "role": "user",
-      "content": [
-        {
-          "type": "text",
-          "text": f"{comments_like_count_list}"
-        },
-        {
-          "type": "text",
-          "text": "Give me the top 3 negative sentiment comments from this list of comments." # TODO: tweak to add like count
-        },
-        {
-          "type": "text",
-          "text": "Give me the top 3 positive sentiment comments from this list of comments." # TODO: tweak to add like count
-        },
-        {
-          "type": "text",
-          "text": "Categorize each comment as positive or negative sentiment, show it to me, and then give me a percentage of positive vs negative sentiment comments."
-        }
-      ]
-    }
-  ],
-  "temperature": 0.7,
-  "top_p": 0.95,
-  "max_tokens": 800
-}
+# comments_like_count_list = '''[('@robertkmackey1987 😄❤️', 3), ('❤🔥❤', 3), ("@0_dd_dd_0 We're really excited about this! 😊", 1), ("Yes, I'm keeping my emails: nightdwellers@hotmail.com ecanus_movie_studio@hotmail.com douglassgibran@hotmail.com", 1), ('Mannnn... You have sooo many bugs in your product. How is your company even leading IT industry!', 0), ("I don't like teams. Seriously I hate it.", 0), ('@tstubs Hi there, Copilot for Teams is not currently available on the Apple Watch.', 0), ('App for Apple Watch???', 0), ("@natattacknelson Hi Nat, thank you for reaching out. Please send us a private message and confirm for us which version of Teams you're using (Business, Education, or Personal)", 0), ('Teams has been a constant letdown over the past couple of weeks. I log on and then 45 minutes later there is a flood of messages I have missed. What is going on?', 0), ('@2amtech Hi there, thanks for reaching out. Yes, Copilot is available on Teams', 0), ('is this already available?', 0), ('Amazing❤️\u200d🔥👏', 0), ('@douglass_gibran_enterprise', 0), ('@clinkitsolutions 💜', 0), ('Nice', 0)]'''
+# # Payload for the request
+# payload_comments = {
+#   "enhancements": {
+#     "ocr": {
+#       "enabled": True
+#     },
+#     "grounding": {
+#       "enabled": True
+#     }
+#   },
+#   "messages": [
+#     {
+#       "role": "user",
+#       "content": [
+#         {
+#           "type": "text",
+#           "text": f"{comments_like_count_list}"
+#         },
+#         {
+#           "type": "text",
+#           "text": "Give me the top 3 negative sentiment comments from this list of comments." # TODO: tweak to add like count
+#         },
+#         {
+#           "type": "text",
+#           "text": "Give me the top 3 positive sentiment comments from this list of comments." # TODO: tweak to add like count
+#         },
+#         {
+#           "type": "text",
+#           "text": "Categorize each comment as positive or negative sentiment, show it to me, and then give me a percentage of positive vs negative sentiment comments."
+#         }
+#       ]
+#     }
+#   ],
+#   "temperature": 0.7,
+#   "top_p": 0.95,
+#   "max_tokens": 800
+# }
 
 # OCR in instagram photo
 # cl.media_info('3321678891070095153').thumbnail_url
