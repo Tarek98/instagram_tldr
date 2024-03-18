@@ -9,10 +9,10 @@ GPT4V_ENDPOINT = os.environ.get("GPT4V_ENDPOINT")
 VISION_API_ENDPOINT = os.environ.get("VISION_API_ENDPOINT")
 VISION_API_KEY = os.environ.get("VISION_API_KEY")
 
-headers = {
-    "Content-Type": "application/json",
-    "api-key": GPT4V_KEY,
-}
+# headers = {
+#     "Content-Type": "application/json",
+#     "api-key": GPT4V_KEY,
+# }
 
 # IMAGE_PATH = "/Users/tarek.a/code/FHL_Instagram_TLDR/openai_test/copilot_teams_post.png"
 # encoded_image = base64.b64encode(open(IMAGE_PATH, 'rb').read()).decode('ascii')
@@ -87,48 +87,82 @@ headers = {
 #   "max_tokens": 800
 # }
 
-# OCR in instagram photo
-# cl.media_info('3321678891070095153').thumbnail_url
-image_url = 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/432473124_692835899469206_6869480885668630288_n.jpg?se=7&stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEzNTAuc2RyIn0&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=iE3N_K5fL8oAX9Oe0ia&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MzMyMTY3ODg5MTA3MDA5NTE1Mw%3D%3D.2-ccb7-5&oh=00_AfB_4QV_8LsK8i_mc1uSumBt0rtgpk5bObpmoh_iHE8CCw&oe=65F76CC3&_nc_sid=fc8dfb'
-response = requests.get(image_url)
-encoded_image = base64.b64encode(response.content).decode('ascii')
-payload_ocr = {
-  "enhancements": {
-    "ocr": {
-      "enabled": True
-    },
-    "grounding": {
-      "enabled": True
-    }
-  },
-  "messages": [
-    {
-      "role": "user",
-      "content": [
-        {
-          "type": "image_url",
-          "image_url": {
-            "url": f"data:image/jpeg;base64,{encoded_image}"
-          }
-        },
-        {
-          "type": "text",
-          "text": "What does this image show?"
-        }
-      ]
-    }
-  ],
-  "temperature": 0.7,
-  "top_p": 0.95,
-  "max_tokens": 800
-}
+# # OCR in instagram photo
+# # cl.media_info('3321678891070095153').thumbnail_url
+# image_url = 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/432473124_692835899469206_6869480885668630288_n.jpg?se=7&stp=dst-jpg_e35&efg=eyJ2ZW5jb2RlX3RhZyI6ImltYWdlX3VybGdlbi4xMDgweDEzNTAuc2RyIn0&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=102&_nc_ohc=iE3N_K5fL8oAX9Oe0ia&edm=ALQROFkBAAAA&ccb=7-5&ig_cache_key=MzMyMTY3ODg5MTA3MDA5NTE1Mw%3D%3D.2-ccb7-5&oh=00_AfB_4QV_8LsK8i_mc1uSumBt0rtgpk5bObpmoh_iHE8CCw&oe=65F76CC3&_nc_sid=fc8dfb'
+# response = requests.get(image_url)
+# encoded_image = base64.b64encode(response.content).decode('ascii')
+# payload_ocr = {
+#   "enhancements": {
+#     "ocr": {
+#       "enabled": True
+#     },
+#     "grounding": {
+#       "enabled": True
+#     }
+#   },
+#   "messages": [
+#     {
+#       "role": "user",
+#       "content": [
+#         {
+#           "type": "image_url",
+#           "image_url": {
+#             "url": f"data:image/jpeg;base64,{encoded_image}"
+#           }
+#         },
+#         {
+#           "type": "text",
+#           "text": "What does this image show?"
+#         }
+#       ]
+#     }
+#   ],
+#   "temperature": 0.7,
+#   "top_p": 0.95,
+#   "max_tokens": 800
+# }
 
-# Send request
-try:
-    response = requests.post(GPT4V_ENDPOINT, headers=headers, json=payload_ocr)
-    response.raise_for_status()  # Will raise an HTTPError if the HTTP request returned an unsuccessful status code
-except requests.RequestException as e:
-    raise SystemExit(f"Failed to make the request. Error: {e}")
+# # Send request
+# try:
+#     response = requests.post(GPT4V_ENDPOINT, headers=headers, json=payload_ocr)
+#     response.raise_for_status()  # Will raise an HTTPError if the HTTP request returned an unsuccessful status code
+# except requests.RequestException as e:
+#     raise SystemExit(f"Failed to make the request. Error: {e}")
+
+def _openai_post_request(payload_messages):
+  headers = {
+      "Content-Type": "application/json",
+      "api-key": GPT4V_KEY,
+  }
+
+  payload = {
+      "enhancements": {
+          "ocr": {
+              "enabled": True
+          },
+          "grounding": {
+              "enabled": True
+          }
+      },
+      "messages": [
+          {
+              "role": "user",
+              "content": payload_messages
+          }
+      ],
+      "temperature": 0.7,
+      "top_p": 0.95,
+      "max_tokens": 800
+  }
+
+  try:
+      response = requests.post(GPT4V_ENDPOINT, headers=headers, json=payload)
+      response.raise_for_status()  
+  except requests.RequestException as e:
+      raise SystemExit(f"Failed to make the request. Error: {e}")
+
+  return response.json()
 
 # Handle the response as needed (e.g., print or process)
 print(response.json())

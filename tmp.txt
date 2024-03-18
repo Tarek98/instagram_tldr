@@ -1,0 +1,5 @@
+'(\'Mannnn... You have sooo many bugs in your product. How is your company even leading IT industry!\', -1), \n("I don\'t like teams. Seriously I hate it.", -1), \n(\'❤🔥❤\', 4), \n(\'App for Apple Watch???\', 0), \n(\'Teams has been a constant letdown over the past couple of weeks. I log on and then 45 minutes later there is a flood of messages I have missed. What is going on?\', -1), \n(\'is this already available?\', 0), \n(\'Amazing❤️\\u200d🔥👏\', 1), \n(\'Nice\', 1), \n("Yes, I\'m keeping my emails: nightdwellers@hotmail.com ecanus_movie_studio@hotmail.com douglassgibran@hotmail.com", 2)'
+
+'[-1, -1, 4, 0, -1, 0, 1, 1, 2]'
+
+'Negative numbers sum: -1 + -1 + -1 = -3\nPositive numbers sum: 4 + 1 + 1 + 2 = 8\nNeutral (zero) count: 2'

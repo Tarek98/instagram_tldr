@@ -19,7 +19,7 @@ test = 1
 # cl.album_download(media_pk, "/Users/tarek.a/code/FHL_Instagram_TLDR/temp_storage/")
 # comments = cl.media_comments(media_pk, 0)
 # extract_comment_like = lambda comment: (comment.text, comment.like_count)
-# comment_like_list = [extract_comment_like(comment) for comment in comments]
+# comment_like_list = [extract_comment_like(comment) for comment in comments if not comment.replied_to_comment_id]
 
 # TODO: weight the comment list by likes - gives more weight to positive/negative sentiments.
 # comment_like_list = sorted(comment_like_list, key=lambda x: x[1], reverse=True)
